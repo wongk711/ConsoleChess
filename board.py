@@ -36,7 +36,6 @@ class Board:
         print(text)
 
 
-
 def init_mat():
     board_mat = np.empty(shape=(8,8), dtype=Square)
 
