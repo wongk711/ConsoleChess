@@ -34,7 +34,7 @@ def get_piece(board, turn):
 
         piece = board.board_mat[row, col].piece
 
-        if piece.id is 'E':
+        if piece.black is -1:
             print('no piece at ' + str(file) + str(rank))
             continue
         if piece.black != turn:
@@ -69,7 +69,7 @@ def get_move(piece, board):
             print('Invalid input!')
             continue
 
-        file = str(input_pos[0])
+        file = str(input_pos[0]).lower()
         rank = int(input_pos[1])
         input_pos = (rows[rank], cols[file])
 
@@ -77,8 +77,6 @@ def get_move(piece, board):
         # 1 : black, 0 : white, -1 : E
         if victim_piece.black is not black:
             valid = piece.check_move(input_pos, board)
-        if not valid:
-            print('Invalid move!')
 
     return [input_pos[0], input_pos[1]]
 
@@ -89,11 +87,12 @@ def move_piece(this_piece, move, board):
     prev = this_piece.row, this_piece.col
     mat = board.board_mat
 
-    prev_piece = Piece('E', prev[0], prev[1], -1)
+    prev_piece = Piece(row=prev[0], col=prev[1], black=-1)
     prev_square = Square(mat[prev[0], prev[1]].black, prev_piece)
     mat[prev[0], prev[1]] = prev_square
 
-    new_piece = Piece(this_id, move[0], move[1], this_piece_color)
+    new_piece = this_piece
+    new_piece.row, new_piece.col, new_piece.black = move[0], move[1], this_piece_color
     next_square = Square(mat[move[0], move[1]].black, new_piece)
     mat[move[0], move[1]] = next_square
 
@@ -118,7 +117,7 @@ def play(game):
 
         this_piece = get_piece(this_board, game.turn)
         this_move = get_move(this_piece, this_board)
-        while this_move is -1:
+        while this_move is -1:  # select new piece
             this_piece = get_piece(this_board, game.turn)
             this_move = get_move(this_piece, this_board)
         this_board = move_piece(this_piece, this_move, this_board)

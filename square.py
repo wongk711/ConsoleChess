@@ -9,8 +9,8 @@ class Square:
 
     def get_sketch(self):
         rows = ['+-----------']
-        if self.piece.id is not 'E':
-            if self.black:
+        if self.piece.black is not -1:
+            if self.black is 1:
                 rows.append('|/ / / / / /')
                 rows.append('| / ' + self.piece.text + ' / ')
                 rows.append('|/ /' + self.piece.color_text + '/ /')
