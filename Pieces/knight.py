@@ -18,7 +18,7 @@ class Knight(Piece):
             print('Knights cannot move in straight line!')
             return False
         if row_diff > 2 or col_diff > 2:
-            print('debug:', self.row, new_pos[0])
+            # print('debug:', self.row, new_pos[0])
             print('Knights must move 2 squares in one direction then 1 square left or right.')
             return False
         if row_diff == col_diff:

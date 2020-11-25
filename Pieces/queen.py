@@ -61,6 +61,7 @@ class Queen(Piece):
             for row, col in zip(range(row_a, row_b), range(col_a, col_b)):
                 if board.board_mat[row, col].piece.black is not -1:
                     print('Queens may not jump over other pieces!')
+                    print('debug:', row, col)
                     return False
             return True
         return False
