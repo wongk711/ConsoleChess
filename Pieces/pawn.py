@@ -23,8 +23,8 @@ class Pawn(Piece):
             if board.board_mat[new_pos[0], new_pos[1]].piece.black is not -1:
                 print('Pawns can only capture pieces by moving diagonally!')
                 return False
-            if row_diff is 2:
-                if self.row is not pawn_row:
+            if row_diff == 2:
+                if self.row != pawn_row:
                     print('A pawn can only move 2 squares on its first move!')
                     return False
                 if board.board_mat[np.average([self.row, new_pos[0]]), self.col].piece.black is not -1:
