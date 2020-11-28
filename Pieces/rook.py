@@ -22,24 +22,24 @@ class Rook(Piece):
         if vert:
             # going up
             if new_pos[0] < self.row:
-                a = new_pos[0] + 1
+                a = new_pos[0]
                 b = self.row
             # down
             else:
                 a = self.row
-                b = new_pos[0] + 1
-            for i in range(a, b):
+                b = new_pos[0]
+            for i in range(a + 1, b):
                 if board.board_mat[i, self.col].piece.black is not -1:
                     print('Rooks cannot jump pieces!')
                     return False
         else:  # L/R
             if new_pos[1] < self.col:  # left
-                a = new_pos[1] + 1
+                a = new_pos[1]
                 b = self.col
             else:
                 a = self.col
-                b = new_pos[1] + 1
-            for i in range(a, b):
+                b = new_pos[1]
+            for i in range(a + 1, b):
                 if board.board_mat[self.row, i].piece.black is not -1:
                     print('Rooks cannot jump pieces!')
                     return False

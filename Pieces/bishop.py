@@ -14,28 +14,35 @@ class Bishop(Piece):
 
         row_diff = np.abs(self.row - new_pos[0])
         col_diff = np.abs(self.col - new_pos[1])
-
+        print('bishop on :', self.row, self.col)
+        print('new_pos :', new_pos[0], new_pos[1])
         if row_diff != col_diff:
             print('Bishops must move diagonally!')
             return False
         # left
         if new_pos[1] < self.col:
-            col_a = new_pos[1] + 1
-            col_b = self.col
+            col_range = list(range(new_pos[1] + 1, self.col))
+            # up
+            if new_pos[0] < self.row:
+                row_range = list(range(new_pos[0] + 1, self.row))
+            # down
+            else:
+                row_range = list(range(self.row + 1, new_pos[0]))
+                row_range.reverse()
         # right
         else:
-            col_a = self.col
-            col_b = new_pos[1] + 1
-        # up
-        if new_pos[0] < self.row:
-            row_a = new_pos[0] + 1
-            row_b = self.row
-        # down
-        else:
-            row_a = self.row
-            row_b = new_pos[0] + 1
+            col_range = list(range(self.col + 1, new_pos[1]))
+            # up
+            if new_pos[0] < self.row:
+                row_range = list(range(new_pos[0] + 1, self.row))
+                row_range.reverse()
+            # down
+            else:
+                row_range = list(range(self.row + 1, new_pos[0]))
 
-        for row, col in zip(range(row_a, row_b), range(col_a, col_b)):
+        for row, col in zip(row_range, col_range):
+            print('debug:', row, col)
             if board.board_mat[row, col].piece.black is not -1:
                 print('Bishops cannot jump over pieces!')
                 return False
+        return True
