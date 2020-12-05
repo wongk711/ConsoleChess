@@ -12,7 +12,7 @@ class Board:
         return
 
     def draw_board(self):
-        text_list = []
+        full_text = ''
         ranks = ['A','B','C','D','E','F','G','H']
         n = len(self.board_mat[0,0].text_rows)
         for i in range(8):  # square rows
@@ -26,16 +26,17 @@ class Board:
                     text += '+'
                 else:
                     text += '|'
-                text_list.append(text)
+                text += '\n'
+                full_text += text
 
-        for i in range(len(text_list)):
-            print(text_list[i])
-        print(' ' + (8*'+-----------')+'+')
-
+        full_text += ' ' + (8*'+-----------')+'+'
         text = ''
         for i in range(8):
             text += ('      ' + ranks[i] + '     ')
-        print(text)
+
+        full_text += text
+
+        print(full_text, end='\r')
 
 
 def init_mat(players):
